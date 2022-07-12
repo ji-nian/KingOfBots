@@ -35,4 +35,8 @@ export default {
 </script>
 
 <style>
+  body {
+    background: url("@/assets/background.png");
+    background-size: cover;
+  }
 </style>
