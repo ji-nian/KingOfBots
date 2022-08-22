@@ -1,3 +1,4 @@
+import router from '@/router';
 import axios from 'axios'
 
 export default {
@@ -40,10 +41,11 @@ export default {
             })
             .then(function (response) {
                 if (response.data.error_message === "success") {
+                    localStorage.setItem("jwt_token", response.data.token);
                     context.commit("updateToken", response.data.token);
-                    data.success(response.data);
+                    data.success(response);
                 } else {
-                    data.error(response.data);
+                    data.error(response);
                 }
             })
             .catch(function (error) {
@@ -58,23 +60,25 @@ export default {
                     Authorization: "Bearer " + context.state.token,
                 },
             })
-            .then(function (response) {
+            .then(function success(response) {
                 if (response.data.error_message === "success") {
                     context.commit("updateUser", {
                         ...response.data, 
                         is_login: true,
                     });
-                    data.success(response.data);
+                    data.success(response);
                 } else {
-                    console.log(response.data);
+                    data.error(response);
                 }
             })
             .catch(function (error) {
-                console.log(error);
-            })
+                data.error(error);
+            });
         },
         logout(context) {
+            localStorage.removeItem("jwt_token");
             context.commit("logout");
+            router.push({ name: "user_account_login" });
         }
     },
     modules: {
