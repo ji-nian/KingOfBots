@@ -8,6 +8,7 @@ import com.kob.backend.service.user.bot.AddService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @Date: 2023/01/06/23:36
  * @Description:
  */
+@Service
 public class AddServiceImpl implements AddService {
     @Autowired
     private BotMapper botMapper;
