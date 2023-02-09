@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-    .playground {
+    div.playground {
         width: 60vw;
         height: 70vh;
         margin: 4% auto;

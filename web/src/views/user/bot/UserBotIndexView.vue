@@ -206,7 +206,7 @@ export default {
                     Modal.getInstance('#update-bot-modal-' + bot.id).hide();
                     refresh_bots();
                 } else {
-                    botadd.error_message = response.data.error_message;
+                    bot.error_message = response.data.error_message;
                 }
             });
         };
