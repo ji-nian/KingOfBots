@@ -15,7 +15,7 @@ export class GameMap extends AcGameObject {
         // this.cols = 13;
         this.cols = 14;  // 防止两条蛇同时走到同一个格子
 
-        this.inner_walls_count = 30;
+        this.inner_walls_count = 20;
         this.walls = [];
 
         this.snakes = [
@@ -39,16 +39,19 @@ export class GameMap extends AcGameObject {
     add_listening_events() {
         this.ctx.canvas.focus();
 
-        const [snake0, snake1] = this.snakes;
         this.ctx.canvas.addEventListener("keydown", e => {
-            if (e.key === "w") snake0.set_direction(0);
-            else if (e.key === "d") snake0.set_direction(1);
-            else if (e.key === "s") snake0.set_direction(2);
-            else if (e.key === "a") snake0.set_direction(3);
-            else if (e.key === "ArrowUp") snake1.set_direction(0);
-            else if (e.key === "ArrowRight") snake1.set_direction(1);
-            else if (e.key === "ArrowDown") snake1.set_direction(2);
-            else if (e.key === "ArrowLeft") snake1.set_direction(3);
+            let d = -1;
+            if (e.key === "w") d = 0;
+            else if (e.key === "d") d = 1;
+            else if (e.key === "s") d = 2;
+            else if (e.key === "a") d = 3;
+
+            if (d >= 0) {
+                this.store.state.pk.socket.send(JSON.stringify({
+                    event: "move",
+                    direction: d,
+                }));
+            }
         });
     }
 
@@ -86,7 +89,7 @@ export class GameMap extends AcGameObject {
 
         for (const snake of this.snakes) {
             let k = snake.cells.length;
-            if (!snake.check_tail_increasing()) {
+            if (!snake.check_tail_increasing()) {  // 当蛇尾会前进的时候，蛇尾不要判断
                 k -- ;
             }
             for (let i = 0; i < k; i ++ ) {

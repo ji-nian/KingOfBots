@@ -16,7 +16,10 @@ export default {
         let canvas = ref(null);
 
         onMounted(() => {
-            new GameMap(canvas.value.getContext('2d'), parent.value, store);
+            store.commit(
+                "updateGameObject", 
+                new GameMap(canvas.value.getContext('2d'), parent.value, store)
+            );
         });
 
         return {
@@ -28,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-    .gamemap {
+    div.gamemap {
         width: 100%;
         height: 100%;
         display: flex;

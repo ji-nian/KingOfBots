@@ -27,14 +27,14 @@ export class Snake extends AcGameObject {
         this.eye_dx = [ // 蛇的眼睛不同方向的x的偏移量
             [-1, 1],
             [1, 1], 
-            [-1, 1], 
+            [1, -1], 
             [-1, -1]
         ]
         this.eye_dy = [ // 蛇的眼睛不同方向的y的偏移量
             [-1, -1],
             [-1, 1], 
             [1, 1], 
-            [-1, 1]
+            [1, -1]
         ]
     }
 
@@ -63,10 +63,6 @@ export class Snake extends AcGameObject {
         const k = this.cells.length;
         for (let i = k; i > 0; i -- ) {
             this.cells[i] = JSON.parse(JSON.stringify(this.cells[i - 1]));
-        }
-
-        if (!this.gamemap.check_valid(this.next_cell)) { // 下一步操作撞了，蛇死亡
-            this.status = "die";
         }
     }
 
