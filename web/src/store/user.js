@@ -32,7 +32,7 @@ export default {
     actions: {
         login(context, data) {
             axios({
-                url: 'http://127.0.0.1:8080/user/account/token/',
+                url: 'http://127.0.0.1:3000/user/account/token/',
                 method: 'post',
                 data: {
                     username: data.username,
@@ -54,7 +54,7 @@ export default {
         },
         getInfo(context, data) {
             axios({
-                url: 'http://127.0.0.1:8080/user/account/info/',
+                url: 'http://127.0.0.1:3000/user/account/info/',
                 method: 'get',
                 headers: {
                     Authorization: "Bearer " + context.state.token,

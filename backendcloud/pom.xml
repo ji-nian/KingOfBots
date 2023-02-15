@@ -14,7 +14,8 @@
 	<modules>
 		<module>matchingsystem</module>
 		<module>backend</module>
-	</modules>
+        <module>botrunningsystem</module>
+    </modules>
 	<name>backendcloud</name>
 	<description>backendcloud</description>
 	<packaging>pom</packaging>
